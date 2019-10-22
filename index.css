@@ -1,0 +1,29 @@
+.front {
+    background-color: blue;
+  }
+  
+  .back {
+    background-color: gray;
+    transform: rotateY(180deg);
+  }
+  
+  .front, .back{
+    backface-visibility: hidden;
+    color: white;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .card {
+    display: inline-block;
+    position: relative;
+    height: 500px;
+    width: 500px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
