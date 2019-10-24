@@ -3,8 +3,10 @@ class GameCard extends HTMLElement {
         super();
         this.flip = false;
         this.root = null;
+        this.value = null;
+        this.addEventListener('click', () => this.flipCard());
     }
-
+    
     connectedCallback() {
         this.root = document.createElement('div');
         let front = document.createElement('div');
@@ -27,9 +29,9 @@ class GameCard extends HTMLElement {
         this.root.classList.remove("flipped")
     }
 
-    flip() {
+    flipCard() {
         this.flip = !this.flip;
-        this.getRootNode.classList.toggle("flipped")
+        this.root.classList.toggle("flipped")
     }
     
 }
