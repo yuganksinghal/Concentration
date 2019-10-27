@@ -5,6 +5,7 @@ class GameBoard extends HTMLElement {
         super();
         this.flipped = [];
         this.completed = [];
+        this.lock = false;
         this.addEventListener('revealCard', e => this.handleCardReveal(e));
     }
 
@@ -19,20 +20,36 @@ class GameBoard extends HTMLElement {
     handleCardReveal(e) {
         if (this.completed.indexOf(e.detail.value) > -1) return;
         this.flipped.push(e.detail.card);
-        if (this.flipped.length > 1) {
-            if (this.flipped[0].value === this.flipped[1].value) {
-                this.completed.push(this.flipped[0].value);
-                this.flipped.pop();
-                this.flipped.pop();
-            } else {
-                setTimeout(() => {
-                    this.flipped[0].flipClose();
-                    this.flipped[1].flipClose();
-                    this.flipped.pop();
-                    this.flipped.pop();
-                }, 1500);
-            }
+        if (this.flipped.length % 2 == 0) {
+            this.checkCards()
         } 
+        
+    }
+
+    checkCards() {
+        if (!this.lock){
+            this.lock = true;
+            if (this.flipped[0].value === this.flipped[1].value) {
+                this.match();
+            } else {
+                setTimeout(() => this.reject(), 1500);
+            }
+        } else {
+            setTimeout(() => this.checkCards(), 100);   
+        }
+    }
+
+    match() {
+        this.completed.push(this.flipped[0].value);
+        this.flipped.splice(0,2);
+        this.lock = false;
+    }
+
+    reject() {
+        this.flipped[0].flipClose();
+        this.flipped[1].flipClose();
+        this.flipped.splice(0,2);
+        this.lock = false;
     }
 
     connectedCallback() {

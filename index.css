@@ -1,29 +1,49 @@
+html, body {
+  display: flex;
+  height: 100vh;
+  align-content: center;
+  width: 100vw;
+}
 .front {
-    background-color: blue;
-  }
-  
-  .back {
-    background-color: gray;
-    transform: rotateY(180deg);
-  }
-  
-  .front, .back{
-    backface-visibility: hidden;
-    color: white;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
-  
-  .card {
-    display: inline-block;
-    position: relative;
-    height: 500px;
-    width: 500px;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  
-  .card.flipped {
-    transform: rotateY(180deg);
-  }
+  background-color: blue;
+}
+
+.back {
+  background-color: gray;
+  transform: rotateY(180deg);
+}
+
+.front, .back{
+  backface-visibility: hidden;
+  color: white;
+  font-family: Helvetica;
+  font-size: 100px;
+  font-weight: 900;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  height: 100px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  width: 100px;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+game-board {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: auto;
+  width: 75vw;
+}
+
+game-card {
+  margin-bottom: 10px;
+}
