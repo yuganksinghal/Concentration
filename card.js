@@ -12,9 +12,12 @@ class GameCard extends HTMLElement {
         this.root = document.createElement('div');
         let front = document.createElement('div');
         front.classList.add('front');
-        let back = document.createElement('div')
+        let back = document.createElement('div');
         back.classList.add('back');
-        back.innerHTML = this.value;
+        let cardValue= document.createElement('div');
+        cardValue.classList.add('value');
+        cardValue.innerHTML = this.value;
+        back.appendChild(cardValue);
         this.root.classList.add('card');
         this.root.appendChild(front);
         this.root.appendChild(back);

@@ -24,9 +24,16 @@ html, body {
   width: 100%;
 }
 
+.value {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
 .card {
-  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   height: 100px;
+  position: relative;
   transition: transform 0.8s;
   transform-style: preserve-3d;
   width: 100px;
@@ -41,6 +48,7 @@ game-board {
   flex-flow: row wrap;
   justify-content: space-around;
   margin: auto;
+  perspective: 500px;
   width: 75vw;
 }
 

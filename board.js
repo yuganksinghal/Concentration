@@ -1,5 +1,3 @@
-const symbols= [0, 1, 2, 3, 4, 5, 6, 7]
-
 class GameBoard extends HTMLElement {
     constructor () {
         super();
@@ -10,11 +8,31 @@ class GameBoard extends HTMLElement {
     }
 
     initGame() {
+        let takenValues = [];
+        let proposedValues = [];
         for (let i=0; i<16; i++) {
             let newCard = document.createElement("game-card");
-            newCard.setAttribute("value", i%8)
+            let cardValue = this.createValue(takenValues, proposedValues);
+            let proposedCardIndex = proposedValues.indexOf(cardValue);
+            if (proposedCardIndex > -1) {
+                proposedValues.splice(proposedCardIndex, 1);
+                takenValues.push(cardValue);
+            } else {
+                proposedValues.push(cardValue);
+            }
+            newCard.setAttribute("value", cardValue)
             this.appendChild(newCard);
         }
+    }
+
+    createValue(takenValues, proposedValues) {
+        let pv = Math.floor(Math.random() * 8);
+        if (takenValues.indexOf(pv) > -1) {
+            return this.createValue(takenValues, proposedValues)
+        } else if (proposedValues.length == 8) {
+            return proposedValues[pv];
+        }
+        return pv;
     }
 
     handleCardReveal(e) {
